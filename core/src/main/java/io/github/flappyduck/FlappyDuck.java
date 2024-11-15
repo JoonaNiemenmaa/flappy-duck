@@ -18,7 +18,7 @@ public class FlappyDuck implements Screen {
         viewport = new FitViewport(80, 50);
         duck = new Duck();
         game_world = new GameWorld(viewport);
-        background = new Background();
+        background = new Background(viewport);
     }
 
     @Override
@@ -32,6 +32,7 @@ public class FlappyDuck implements Screen {
 
         duck.update(delta, game_world, viewport, main);
         game_world.update();
+        background.update(delta);
 
         viewport.apply();
         main.batch.setProjectionMatrix(viewport.getCamera().combined);
