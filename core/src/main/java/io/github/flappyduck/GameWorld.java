@@ -84,4 +84,8 @@ public class GameWorld {
     public Chunk[] getChunkQueue() {
         return chunk_queue;
     }
+
+    public float getScrollSpeed() {
+        return scroll_speed;
+    }
 }

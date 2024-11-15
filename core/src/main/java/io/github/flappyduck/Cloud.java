@@ -12,7 +12,7 @@ public class Cloud {
     private float x;
     private float y;
 
-    final private float speed;
+    private float speed;
 
     public Cloud(Texture texture, float world_width, float world_height) {
         this.texture = texture;
@@ -34,7 +34,19 @@ public class Cloud {
         return x;
     }
 
+    public void setX(float x) {
+        this.x = x;
+    }
+
     public float getWidth() {
         return width;
+    }
+
+    public float getSpeed() {
+        return speed;
+    }
+
+    public void stop() {
+        speed = 0;
     }
 }

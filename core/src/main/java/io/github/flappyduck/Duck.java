@@ -24,11 +24,19 @@ public class Duck {
 
     private boolean dead = false;
 
-    public Duck () {
+    final private GameWorld game_world;
+    final private Background background;
+    final private FitViewport viewport;
+
+    public Duck (GameWorld game_world, Background background, FitViewport viewport) {
         texture = new Texture("duck.png");
+
+        this.game_world = game_world;
+        this.background = background;
+        this.viewport = viewport;
     }
 
-    public void update(float delta, GameWorld game_world, FitViewport viewport, Main main) {
+    public void update(float delta) {
         if (y_speed > -max_fall_speed) {
             y_speed -= gravity * delta;
         }
@@ -42,14 +50,15 @@ public class Duck {
         }
 
 
-        if (detectCollision(game_world, viewport)) {
+        if (detectCollision()) {
             dead = true;
             game_world.setScroll(false);
+            background.stopParallax();
         }
 
     }
 
-    private boolean detectCollision(GameWorld game_world, FitViewport viewport) {
+    private boolean detectCollision() {
         Chunk[] chunk_queue = game_world.getChunkQueue();
         for (Chunk chunk : chunk_queue) {
             boolean in_pipe_x = x > chunk.getPipeX() - duck_width + collision_grace && x < chunk.getPipeX() + chunk.getPipeWidth() - collision_grace;

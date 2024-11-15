@@ -16,9 +16,9 @@ public class FlappyDuck implements Screen {
     public FlappyDuck(Main main) {
         this.main = main;
         viewport = new FitViewport(80, 50);
-        duck = new Duck();
         game_world = new GameWorld(viewport);
         background = new Background(viewport);
+        duck = new Duck(game_world, background, viewport);
     }
 
     @Override
@@ -30,7 +30,7 @@ public class FlappyDuck implements Screen {
     public void render(float delta) {
         ScreenUtils.clear(Color.DARK_GRAY);
 
-        duck.update(delta, game_world, viewport, main);
+        duck.update(delta);
         game_world.update();
         background.update(delta);
 
