@@ -1,5 +1,6 @@
 package io.github.flappyduck;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -12,13 +13,17 @@ public class FlappyDuck implements Screen {
     final private GameWorld game_world;
     final private FitViewport viewport;
     final private Background background;
+    final private ScoreTracker score_tracker;
+
+    private boolean start = false;
 
     public FlappyDuck(Main main) {
         this.main = main;
-        viewport = new FitViewport(80, 50);
+        viewport = main.viewport;
         game_world = new GameWorld(viewport);
         background = new Background(viewport);
-        duck = new Duck(game_world, background, viewport);
+        duck = new Duck(main, game_world, background, viewport);
+        score_tracker = new ScoreTracker(duck, game_world, main.font);
     }
 
     @Override
@@ -30,9 +35,16 @@ public class FlappyDuck implements Screen {
     public void render(float delta) {
         ScreenUtils.clear(Color.DARK_GRAY);
 
-        duck.update(delta);
-        game_world.update();
-        background.update(delta);
+        if (start) {
+            duck.update(delta);
+            game_world.update();
+            background.update(delta);
+            score_tracker.update();
+        }
+
+        if (Gdx.input.isTouched()) {
+            start = true;
+        }
 
         viewport.apply();
         main.batch.setProjectionMatrix(viewport.getCamera().combined);
@@ -41,6 +53,8 @@ public class FlappyDuck implements Screen {
         background.draw(main.batch);
         game_world.draw(main.batch);
         duck.draw(main.batch);
+        if (start) score_tracker.drawScore(main.batch);
+        if (!start) main.font.draw(main.batch, "Click to start!", 20, 30);
         main.batch.end();
     }
 

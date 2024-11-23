@@ -16,7 +16,7 @@ public class Duck {
 
     final private float collision_grace = 1.685f;
 
-    final private float flap_power = 0.6f;
+    final private float flap_power = 0.5f;
     final private float gravity = 2;
     final private float max_fall_speed = 2;
 
@@ -27,13 +27,17 @@ public class Duck {
     final private GameWorld game_world;
     final private Background background;
     final private FitViewport viewport;
+    final private Main main;
 
-    public Duck (GameWorld game_world, Background background, FitViewport viewport) {
+    public Duck (Main main, GameWorld game_world, Background background, FitViewport viewport) {
         texture = new Texture("duck.png");
 
+        this.main = main;
         this.game_world = game_world;
         this.background = background;
         this.viewport = viewport;
+
+        y_speed = flap_power;
     }
 
     public void update(float delta) {
@@ -48,19 +52,18 @@ public class Duck {
         } else {
             y_speed = 0;
         }
-
-
+        if (Gdx.input.isTouched() && dead && y_speed == 0) {
+            main.setScreen(new FlappyDuck(main));
+        }
         if (detectCollision()) {
             dead = true;
             game_world.setScroll(false);
             background.stopParallax();
         }
-
     }
 
     private boolean detectCollision() {
-        Chunk[] chunk_queue = game_world.getChunkQueue();
-        for (Chunk chunk : chunk_queue) {
+        for (Chunk chunk : game_world.getChunkQueue()) {
             boolean in_pipe_x = x > chunk.getPipeX() - duck_width + collision_grace && x < chunk.getPipeX() + chunk.getPipeWidth() - collision_grace;
             boolean in_pipe_y = y < chunk.getHoleHeight() || y > chunk.getHoleHeight() + chunk.getHoleSize() - duck_height;
             if (in_pipe_x && in_pipe_y) {
@@ -72,5 +75,16 @@ public class Duck {
 
     public void draw(SpriteBatch batch) {
         batch.draw(texture, x, y, duck_width, duck_height);
+        if (dead) {
+            main.font.draw(batch, "Click anywhere to retry!", 3, 30);
+        }
+    }
+
+    public float getX() {
+        return x;
+    }
+
+    public float getDuckWidth() {
+        return duck_width;
     }
 }

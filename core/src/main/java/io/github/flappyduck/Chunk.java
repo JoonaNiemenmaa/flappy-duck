@@ -78,7 +78,7 @@ public class Chunk {
     }
 
     public float getChunkWidth() {
-        return (tiles_until_pipe + 2) * tile_width;
+        return tiles_until_pipe * tile_width + pipe_width;
     }
 
     public float getHoleHeight() {
