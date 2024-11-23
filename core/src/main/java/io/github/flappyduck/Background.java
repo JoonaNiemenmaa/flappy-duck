@@ -12,6 +12,8 @@ public class Background {
 
     final private Array<Cloud> clouds;
 
+    final private int initial_clouds = 8;
+
     final private float time_between_clouds = 5;
     private float cloud_timer;
 
@@ -23,6 +25,12 @@ public class Background {
         cloud_timer = time_between_clouds;
         clouds = new Array<>();
         this.viewport = viewport;
+
+        for (int i = 0; i < initial_clouds; i++) {
+            clouds.add(new Cloud(cloud, viewport.getWorldWidth(), viewport.getWorldHeight()));
+            clouds.get(i).setX((float)Math.random() * viewport.getWorldWidth());
+        }
+
     }
 
     public void update(float delta) {
@@ -46,6 +54,10 @@ public class Background {
         }
     }
 
-
+    public void stopParallax() {
+        for (Cloud cloud : clouds) {
+            cloud.stop();
+        }
+    }
 
 }

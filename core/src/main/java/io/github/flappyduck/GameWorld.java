@@ -8,7 +8,7 @@ public class GameWorld {
 
     private boolean scroll = true;
 
-    final private int tiles_until_first_pipe = 8;
+    final private int tiles_until_first_pipe = 16;
     final private int tiles_between_pipes = 4;
 
     final private float scroll_speed = 12;
@@ -83,5 +83,18 @@ public class GameWorld {
 
     public Chunk[] getChunkQueue() {
         return chunk_queue;
+    }
+
+    public float getScrollSpeed() {
+        return scroll_speed;
+    }
+
+    public Chunk getNextChunk(Chunk current_chunk) {
+        for (int i = 0; i < chunk_queue.length; i++) {
+            if (chunk_queue[i] == current_chunk) {
+                return chunk_queue[i + 1];
+            }
+        }
+        return chunk_queue[0];
     }
 }
