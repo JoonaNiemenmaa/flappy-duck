@@ -1,6 +1,6 @@
 # flappyduck
 
-A LibGdx project made for the [20 games challenge]([url](https://20_games_challenge.gitlab.io/)).
+A LibGdx project made for the [20 games challenge]([url](https://20_games_challenge.gitlab.io/))
 
 The gameplay emulates the ever so legendary mobile game Flappy Bird!
 
@@ -12,5 +12,5 @@ Tested on desktop Linux, but should work on Windows too as long as JRE 21 is ins
 
 Requires JRE 21 to install
 
-[Latest release]([url](https://github.com/PANAANI/flappy-duck/releases/tag/v.1.0.1)) 
+[Latest release]([url](https://github.com/PANAANI/flappy-duck/releases/tag/v.1.0.1))
 
