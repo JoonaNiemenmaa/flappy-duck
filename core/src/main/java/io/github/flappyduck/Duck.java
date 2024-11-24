@@ -16,9 +16,9 @@ public class Duck {
 
     final private float collision_grace = 1.685f;
 
-    final private float flap_power = 0.5f;
-    final private float gravity = 2;
-    final private float max_fall_speed = 2;
+    final private float flap_power = 30;
+    final private float gravity = 100;
+    final private float max_fall_speed = 50;
 
     private float y_speed = 0;
 
@@ -48,7 +48,7 @@ public class Duck {
             y_speed = flap_power;
         }
         if (y > 5) {
-            y += y_speed;
+            y += y_speed * delta;
         } else {
             y_speed = 0;
         }

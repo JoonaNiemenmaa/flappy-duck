@@ -37,7 +37,7 @@ public class FlappyDuck implements Screen {
 
         if (start) {
             duck.update(delta);
-            game_world.update();
+            game_world.update(delta);
             background.update(delta);
             score_tracker.update();
         }

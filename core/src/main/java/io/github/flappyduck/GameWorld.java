@@ -52,11 +52,11 @@ public class GameWorld {
         }
     }
 
-    public void update() {
+    public void update(float delta) {
         if (scroll) {
             for (Chunk chunk : chunk_queue) {
                 if (chunk != null) {
-                    chunk.setX(chunk.getX() - scroll_speed * (1.0f / 60.0f));
+                    chunk.setX(chunk.getX() - scroll_speed * delta);
                 }
             }
             if (chunk_queue[0].getX() < -chunk_queue[0].getChunkWidth()) {
