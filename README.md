@@ -6,8 +6,11 @@ The gameplay emulates the ever so legendary mobile game Flappy Bird!
 
 ## Platforms
 
-Desktop
+Tested on desktop Linux, but should work on Windows too as long as JRE 21 is installed
 
-## Builds
+## Installation
 
+Requires JRE 21 to install
+
+[Latest release]([url](https://github.com/PANAANI/flappy-duck/releases/tag/v.1.0.1)) 
 
